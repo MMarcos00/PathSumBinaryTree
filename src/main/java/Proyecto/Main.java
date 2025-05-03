@@ -3,29 +3,31 @@ package Proyecto;
 import Proyecto.model.TreeNode;
 import Proyecto.service.PathSumService;
 import Proyecto.utils.TreeBuilder;
+import Proyecto.utils.TreePrinter;
 
 import java.util.List;
 
-/**
- * Punto de entrada principal de la aplicación.
- */
 public class Main {
     public static void main(String[] args) {
-        // Árbol: [5,4,8,11,null,13,4,7,2,null,null,5,1]
         Integer[] treeValues = {
-                5, 4, 8, 11, null, 13, 4,
-                7, 2, null, null, 5, 1
+                0, 9, 0, 5, 2, 3, 5, 3, 2, 4
         };
-        int targetSum = 22;
+
+        int targetSum = 14;
 
         TreeNode root = TreeBuilder.buildTree(treeValues);
+
+        // Imprimir el árbol en forma gráfica
+        System.out.println("Árbol generado:");
+        TreePrinter.printTree(root);
+
+        // Buscar caminos con suma deseada
         PathSumService service = new PathSumService();
         List<List<Integer>> paths = service.findPaths(root, targetSum);
 
-        System.out.println("Caminos que suman " + targetSum + ":");
+        System.out.println("\nCaminos que suman " + targetSum + ":");
         for (List<Integer> path : paths) {
             System.out.println(path);
         }
     }
 }
-
